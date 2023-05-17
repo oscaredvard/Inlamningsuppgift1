@@ -1,0 +1,90 @@
+openapi: 3.0.0
+info:
+  title: Shopping API
+  version: 1.0.0
+
+paths:
+  /products:
+    get:
+      summary: Get products
+      responses:
+        '200':
+          description: Lyckad begäran
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+  /carts:
+    post:
+      summary: Create a shopping cart
+      responses:
+        '201':
+          description: Successfull
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+
+  /carts/{cartId}/items/{productId}:
+    put:
+      summary: Add a product to the shopping cart
+      parameters:
+        - name: cartId
+          in: path
+          description: ID for the shopping cart
+          required: true
+          schema:
+            type: string
+        - name: productId
+          in: path
+          description: ID for the product
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemUpdate'
+      responses:
+        '200':
+          description: Successfull
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
+
+    Cart:
+      type: object
+      properties:
+        id:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItem'
+
+    CartItem:
+      type: object
+      properties:
+        productId:
+          type: string
+        quantity:
+          type: integer
+
+    CartItemUpdate:
+      type: object
+      properties:
+        quantity:
+          type: integer

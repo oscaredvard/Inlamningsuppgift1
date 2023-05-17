@@ -1,0 +1,22 @@
+Hämta produkter
+GET /products
+1. Skicka en GET förfrågan till /products
+2. Produkterna returneras
+
+Hämta kundvagnar
+GET /carts
+1. Skicka en GET förfrågan till /carts
+2. Kundvagnarna returneras
+
+Skapa en kundvagn
+POST /carts
+1. Skapa en ny kundvagn
+2. Skicka en POST förfrågan till /carts
+3. Returnera 200 OK och kundvagnen som skapats
+
+Lägg till n antal av en viss produkt i kundvagnen (Uppdatera kundvagnen)
+PUT /carts/{cartID}/items/{productID}
+1. Ange cartID för den aktuella kundvagnen och productID för den produkt som ska läggas till
+2. Skapa en CartItem med productID och antal
+3. Skicka en PUT-förfrågan till /carts/{cartID}/items/{productID} med CartItem som requestBody 
+4. Returnera 200 OK med CartItem lades till/uppdaterades som response
